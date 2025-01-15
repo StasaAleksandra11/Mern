@@ -1,59 +1,51 @@
 const Users = require('../models/userModel');
 const AppError = require('../utils/AppError');
+const catchAsync = require('../utils/catchAsync');
+const Email = require('../utils/Email');
 
-exports.register = async (req, res, next) => {
-    try {
-        const user = await Users.findOne({ email: req.body.email });
-        console.log(req.body, 'req.body');
-        
+//-----------------------
+//----REGISTER-----------
+//-----------------------
 
-        if (!user) {
-            const newUser = new Users(req.body);
-
-            try {
-                const saveNewUSer = await newUser.save();
-                return res.status(200).json({
-                    status: 'success',
-                    message: 'User uspesno registrovan',
-                });
-            } catch (err) {
-                return next(new AppError('Nije sacuvan user u bazi', 500));
-            }
-        } else {
-            return next(new AppError('Ovakav korisnik vec postoji', 409));
-        }
-    } catch (err) {
-        return next(new AppError('Greska je na serveru', 500));
+exports.register = catchAsync(async (req, res, next) => {
+    const user = await Users.findOne({ email: req.body.email });
+    console.log(req.body, 'req.body');
+    if (!user) {
+        const newUser = new Users(req.body);
+        const saveNewUSer = await newUser.save();
+        await new Email(req.body, 'www.localhost.com').sendWelcome()
+        console.log('poslat mail')
+        return res.status(200).json({
+            status: 'success',
+            message: 'User uspesno registrovan',
+        });
+    } else {
+        return next(new AppError('Ovakav korisnik vec postoji', 409));
     }
-};
+});
+
+//-----------------
+//-----LOGIN-------
+//-----------------
 
 exports.login = async (req, res, next) => {
-    try {
-        const user = await Users.findOne({ email: req.body.email });
-        console.log(user, 'user');
-        
-        if (user) {
-            if (user.password === req.body.password) {
-                return res.status(200).json({
-                    status: 'succes',
-                    message: 'Uspesno ste se logovali',
-                });
-            } else {
-                return res.status(404).json({
-                    status: 'fail',
-                    message: 'Netacni kredencijali',
-                });
-            }
+    const user = await Users.findOne({ email: req.body.email });
+    console.log(user, 'user');
+
+    if (!user) {
+        return next(new AppError('Ovakav korisnik vec postoji, molimo vas registrujte se', 401));
+    }
+    if (user) {
+        if (user.password === req.body.password) {
+            return res.status(200).json({
+                status: 'succes',
+                message: 'Uspesno ste se logovali',
+            });
         } else {
             return res.status(404).json({
                 status: 'fail',
-                message: 'Ovakav korisnik ne postoji',
+                message: 'Netacni kredencijali',
             });
         }
-    } catch (err) {
-        return res.status(500).json({
-            status: 'error',
-            message: 'Greska na serveru',
-        });
     }
 };
