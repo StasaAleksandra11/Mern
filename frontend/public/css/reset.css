@@ -1,0 +1,60 @@
+/* Global reset for all elements */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Set background and text colors for the whole document */
+body {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Remove default input styles */
+input,
+button,
+select,
+textarea {
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+}
