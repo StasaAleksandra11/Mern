@@ -4,17 +4,24 @@ import './Navigation.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrencyAction } from '../../store/currencySlice';
 import { useEffect } from 'react';
+import { toggleLoginFormAction } from '../../store/loginRegisterSlice';
+import { localStorageConfig } from '../../config/localStorageConfig';
+
 function Navigations() {
+
     const dispatch = useDispatch();
     const { currency, symbol } = useSelector((state) => state.currencyStore);
-     
+    const { isLoginForm } = useSelector((state) => state.loginRegisterStore);
     useEffect(()=> {
-        localStorage.setItem('currency', currency)
+        localStorage.setItem(localStorageConfig.CURRENCY, currency)
     },[currency])
 
     const changeCurrency = (e) => {
         dispatch(setCurrencyAction(e.target.value));
     };
+    const changeToggleView = () => {
+      dispatch(toggleLoginFormAction(!isLoginForm))
+    }
     return (
         <>
             <header>
@@ -38,7 +45,7 @@ function Navigations() {
                                     <NavLink to={routesConfig.CONTACT.url}>Contact</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={routesConfig.AUTHORIZATION.url}>Authorization</NavLink>
+                                    <NavLink to={routesConfig.AUTHORIZATION.url} onClick={changeToggleView}>{isLoginForm ? 'Register' : 'Login'}</NavLink>
                                 </li>
                             </ul>
                         </div>
