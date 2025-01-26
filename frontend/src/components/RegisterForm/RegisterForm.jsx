@@ -6,6 +6,7 @@ import { FaRegEyeSlash } from 'react-icons/fa6';
 import { useState } from 'react';
 import Button from '../Button/Button';
 import { chekEmailValidation } from '../../utils/chekEmailValidation';
+import { register } from '../../services/userService';
 
 function RegisterForm() {
     const [showPassword, setShowPassword] = useState(false);
@@ -24,7 +25,7 @@ function RegisterForm() {
         setData(newData);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         !data.email ? setIsEmailFilled(false) : setIsEmailFilled(true);
@@ -32,6 +33,7 @@ function RegisterForm() {
         !chekEmailValidation(data.email) ? setIsEmailVallid(false) : setIsEmailVallid(true);
 
         if (!data.email || !data.password || !chekEmailValidation(data.email)) return;
+        const res = await register(data)
     };
 
     return (
