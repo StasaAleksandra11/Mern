@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import LoginForm from '../../components/Navigations/Login form/LoginForm'
-import RegisterForm from '../../components/Navigations/RegisterForm/RegisterForm';
+import LoginForm from '../../components/Loginform/LoginForm'
+import RegisterForm from '../../components/RegisterForm/RegisterForm'
 function AuthorizationPage() {
     const { isLoginForm } = useSelector((state) => state.loginRegisterStore);
 

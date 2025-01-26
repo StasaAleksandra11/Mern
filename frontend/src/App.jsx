@@ -3,8 +3,9 @@ import ShopPage from './pages/Shop/ShopPage';
 import { routesConfig } from './config/routesConfig.js';
 import ContactPage from './pages/Contact/ContactPage.jsx';
 import AuthorizationPage from './pages/Authorization/AuthorizationPage.jsx';
-import Navigations from './components/Navigations/Navigations.jsx';
+
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
+import Navigations from './components/Navigation/Navigations.jsx';
 function App() {
     return (
         <>
