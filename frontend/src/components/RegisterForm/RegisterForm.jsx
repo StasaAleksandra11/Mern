@@ -34,6 +34,12 @@ function RegisterForm() {
 
         if (!data.email || !data.password || !chekEmailValidation(data.email)) return;
         const res = await register(data)
+        console.log(res, 'res iz servisa');
+        if(res.status === 'success'){
+            alert(res.message);
+        }
+        console.log('a ovdeeeeee');
+        
     };
 
     return (
