@@ -6,9 +6,12 @@ import AuthorizationPage from './pages/Authorization/AuthorizationPage.jsx';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import Navigations from './components/Navigation/Navigations.jsx';
 import './config/axiosConfig.js';
+
+
 function App() {
     return (
         <>
+            
             <Navigations />
             <Routes>
                 <Route path={routesConfig.SHOP.url} element={<ShopPage />} />

@@ -7,16 +7,23 @@ import { useState } from 'react';
 import Button from '../Button/Button';
 import { chekEmailValidation } from '../../utils/chekEmailValidation';
 import { register } from '../../services/userService';
+import LoaderComponent from '../Loader/LoaderComponent';
+
 
 function RegisterForm() {
+    
+    const [isEmailFilled, setIsEmailFilled] = useState(true);
+    const [isEmailValid, setIsEmailVallid] = useState(true);
+    const [isUsername, setIsUsername] = useState(true);
+    const [isPasswordFilled, setIsPasswordFilled] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
     const [data, setData] = useState({
         email: '',
+        username: '',
         password: '',
     });
-    const [isEmailFilled, setIsEmailFilled] = useState(true);
-    const [isPasswordFilled, setIsPasswordFilled] = useState(true);
-    const [isEmailValid, setIsEmailVallid] = useState(true);
+
+    const [loader, setLoader] = useState(false)
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -26,24 +33,27 @@ function RegisterForm() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
 
+        e.preventDefault();
         !data.email ? setIsEmailFilled(false) : setIsEmailFilled(true);
+        !data.username ? setIsUsername(false) : setIsUsername(true);
         !data.password ? setIsPasswordFilled(false) : setIsPasswordFilled(true);
         !chekEmailValidation(data.email) ? setIsEmailVallid(false) : setIsEmailVallid(true);
 
-        if (!data.email || !data.password || !chekEmailValidation(data.email)) return;
-        const res = await register(data)
+        if (!data.email || !data.username || !data.password || !chekEmailValidation(data.email)) return;
+        setLoader(true)
+        const res = await register(data);
+        setLoader(false)
         console.log(res, 'res iz servisa');
-        if(res.status === 'success'){
-            alert(res.message);
+        if (res.status === 'success') {
+            
+            console.log('podaci');
         }
-        console.log('a ovdeeeeee');
-        
     };
-
+     
     return (
         <>
+            {loader ? <LoaderComponent/> : null}
             {console.log(data, 'data')}
             <div className='register-wrapper'>
                 <form onSubmit={handleSubmit}>
@@ -52,6 +62,12 @@ function RegisterForm() {
                             {isEmailFilled ? (isEmailValid ? 'Email' : 'Email is not valid') : 'Email is required'}
                         </Label>
                         <Input type='text' id='email' placeholder='email@example.com' onChange={handleChange} />
+                    </div>
+                    <div className='input-wrapper'>
+                        <Label htmlFor='username' styleColor={isUsername}>
+                            {isUsername ? 'Username' : 'Username is required'}
+                        </Label>
+                        <Input type='text' id='username' placeholder='check your username' onChange={handleChange} />
                     </div>
                     <div className='input-wrapper'>
                         <Label htmlFor='password' styleColor={isPasswordFilled}>

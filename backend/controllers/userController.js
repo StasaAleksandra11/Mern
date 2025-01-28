@@ -13,7 +13,7 @@ exports.register = catchAsync(async (req, res, next) => {
     if (!user) {
         const newUser = new Users(req.body);
         const saveNewUSer = await newUser.save();
-        await new Email(req.body, 'www.localhost.com').sendWelcome()
+        await new Email({email: saveNewUSer.email, username: saveNewUSer.username}, 'http://localhost:5173/').sendWelcome()
         console.log('poslat mail')
         return res.status(200).json({
             status: 'success',

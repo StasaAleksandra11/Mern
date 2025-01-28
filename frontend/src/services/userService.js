@@ -7,6 +7,7 @@ export const register = async (user) => {
           console.log('res iz servisa');
           
             return {
+                
                 status: res.data.status,
                 message: res.data.message,
             };
