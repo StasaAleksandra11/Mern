@@ -4,7 +4,7 @@ import './Navigation.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrencyAction } from '../../store/currencySlice';
 import { useEffect } from 'react';
-import { toggleLoginFormAction } from '../../store/loginRegisterSlice';
+import { toggleLoginFormAction } from '../../store/login/loginRegisterSlice';
 import { localStorageConfig } from '../../config/localStorageConfig';
 
 function Navigations() {

@@ -7,7 +7,7 @@ const loaderSlice = createSlice({
     },
     reducers: {
         showLoaderAction: (state, action) => {
-            state.loader = action.payload;
+            state.showLoader = action.payload;
         },
     },
 });

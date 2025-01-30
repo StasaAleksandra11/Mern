@@ -9,8 +9,14 @@ const loginRegisterSlice = createSlice({
         toggleLoginFormAction: (state, action) => {
             state.isLoginForm = action.payload;
         },
+        showLoginForm: (state) => {
+            state.isLoginForm = true;
+        },
+        showRegisterForm: (state) => {
+            state.isLoginForm = false;
+        },
     },
 });
 
-export const { toggleLoginFormAction } = loginRegisterSlice.actions;
+export const { toggleLoginFormAction, showLoginForm, showRegisterForm } = loginRegisterSlice.actions;
 export default loginRegisterSlice.reducer;

@@ -7,11 +7,16 @@ import { useState } from 'react';
 import Button from '../Button/Button';
 import { chekEmailValidation } from '../../utils/chekEmailValidation';
 import { register } from '../../services/userService';
-import LoaderComponent from '../Loader/LoaderComponent';
-
+import { useDispatch } from 'react-redux';
+// import LoaderComponent from '../Loader/LoaderComponent';
+import { showLoaderAction } from '../../store/loader/loaderSlice';
+import { toast } from 'react-toastify';
+import { showLoginForm } from '../../store/login/loginRegisterSlice';
+import { FaArrowRight } from 'react-icons/fa6';
 
 function RegisterForm() {
-    
+    const dispatch = useDispatch();
+
     const [isEmailFilled, setIsEmailFilled] = useState(true);
     const [isEmailValid, setIsEmailVallid] = useState(true);
     const [isUsername, setIsUsername] = useState(true);
@@ -23,7 +28,7 @@ function RegisterForm() {
         password: '',
     });
 
-    const [loader, setLoader] = useState(false)
+    // const [loader, setLoader] = useState(false)
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -33,7 +38,6 @@ function RegisterForm() {
     };
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
         !data.email ? setIsEmailFilled(false) : setIsEmailFilled(true);
         !data.username ? setIsUsername(false) : setIsUsername(true);
@@ -41,43 +45,60 @@ function RegisterForm() {
         !chekEmailValidation(data.email) ? setIsEmailVallid(false) : setIsEmailVallid(true);
 
         if (!data.email || !data.username || !data.password || !chekEmailValidation(data.email)) return;
-        setLoader(true)
+
+        dispatch(showLoaderAction(true));
+        // setLoader(true)
         const res = await register(data);
-        setLoader(false)
+        dispatch(showLoaderAction(false));
+        // setLoader(false)
         console.log(res, 'res iz servisa');
+
         if (res.status === 'success') {
-            
-            console.log('podaci');
+            toast.success(res.message);
+            dispatch(showLoginForm());
+        } else {
+            toast.error(res.message);
         }
     };
-     
+
     return (
         <>
-            {loader ? <LoaderComponent/> : null}
-            {console.log(data, 'data')}
-            <div className='register-wrapper'>
-                <form onSubmit={handleSubmit}>
-                    <div className='input-wrapper'>
-                        <Label htmlFor='email' styleColor={isEmailFilled ? isEmailValid : isEmailFilled}>
-                            {isEmailFilled ? (isEmailValid ? 'Email' : 'Email is not valid') : 'Email is required'}
-                        </Label>
-                        <Input type='text' id='email' placeholder='email@example.com' onChange={handleChange} />
-                    </div>
-                    <div className='input-wrapper'>
-                        <Label htmlFor='username' styleColor={isUsername}>
-                            {isUsername ? 'Username' : 'Username is required'}
-                        </Label>
-                        <Input type='text' id='username' placeholder='check your username' onChange={handleChange} />
-                    </div>
-                    <div className='input-wrapper'>
-                        <Label htmlFor='password' styleColor={isPasswordFilled}>
-                            {isPasswordFilled ? 'Password' : 'Password is required'}
-                        </Label>
-                        <Input type={showPassword ? 'text' : 'password'} id='password' placeholder='password' onChange={handleChange} />
-                        <span onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FiEye /> : <FaRegEyeSlash />}</span>
-                    </div>
-                    <Button>Register</Button>
-                </form>
+            <div className='register-form-wrapper'>
+                <div className='content'>
+                    <h3>Welcome to TechMern Shop </h3>
+                    <p>
+                        if alredy have account please{' '}
+                        <span onClick={() => dispatch(showLoginForm())}>
+                            Go to Login <FaArrowRight />{' '}
+                        </span>
+                    </p>
+                </div>
+
+                {console.log(data, 'data')}
+                <div className='register-wrapper'>
+                    <form onSubmit={handleSubmit}>
+                        <div className='input-wrapper'>
+                            <Label htmlFor='email' styleColor={isEmailFilled ? isEmailValid : isEmailFilled}>
+                                {isEmailFilled ? (isEmailValid ? 'Email' : 'Email is not valid') : 'Email is required'}
+                            </Label>
+                            <Input type='text' id='email' placeholder='email@example.com' onChange={handleChange} />
+                        </div>
+                        <div className='input-wrapper'>
+                            <Label htmlFor='username' styleColor={isUsername}>
+                                {isUsername ? 'Username' : 'Username is required'}
+                            </Label>
+                            <Input type='text' id='username' placeholder='check your username' onChange={handleChange} />
+                        </div>
+                        <div className='input-wrapper'>
+                            <Label htmlFor='password' styleColor={isPasswordFilled}>
+                                {isPasswordFilled ? 'Password' : 'Password is required'}
+                            </Label>
+                            <Input type={showPassword ? 'text' : 'password'} id='password' placeholder='password' onChange={handleChange} />
+                            <span onClick={() => setShowPassword(!showPassword)}>{showPassword ? <FiEye /> : <FaRegEyeSlash />}</span>
+                        </div>
+                        <Button className='btn btn-primary' style={{width: "100%"}}>Register</Button>
+                    </form>
+                </div>
             </div>
         </>
     );
