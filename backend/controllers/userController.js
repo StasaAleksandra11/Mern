@@ -13,8 +13,8 @@ exports.register = catchAsync(async (req, res, next) => {
     if (!user) {
         const newUser = new Users(req.body);
         const saveNewUSer = await newUser.save();
-        await new Email({email: saveNewUSer.email, username: saveNewUSer.username}, 'http://localhost:5173/').sendWelcome()
-        console.log('poslat mail')
+        await new Email({ email: saveNewUSer.email, username: saveNewUSer.username }, 'http://localhost:5173/').sendWelcome();
+
         return res.status(200).json({
             status: 'success',
             message: 'User uspesno registrovan',
@@ -29,23 +29,24 @@ exports.register = catchAsync(async (req, res, next) => {
 //-----------------
 
 exports.login = async (req, res, next) => {
-    const user = await Users.findOne({ email: req.body.email });
-    console.log(user, 'user');
+    const user = await Users.findOne({ email: req.body.email }).select('+password');
 
     if (!user) {
         return next(new AppError('Ovakav korisnik vec postoji, molimo vas registrujte se', 401));
     }
-    if (user) {
-        if (user.password === req.body.password) {
-            return res.status(200).json({
-                status: 'succes',
-                message: 'Uspesno ste se logovali',
-            });
-        } else {
-            return res.status(404).json({
-                status: 'fail',
-                message: 'Netacni kredencijali',
-            });
-        }
-    }
+
+    //proveravamo password
+    const isCorrectPassword = await user.isCorrectPassword(req.body.password, user.password);
+    console.log(isCorrectPassword, 'isCorrect');
+
+    if (!isCorrectPassword) return next(new AppError('netacni kredencijali', 401));
+
+    //izbacujemo password pre slanja na front
+    const { password, ...userData } = user.toObject();
+
+    return res.status(200).json({
+        status: 'success',
+        message: 'Uspesno ste se logovali',
+        user: userData,
+    });
 };

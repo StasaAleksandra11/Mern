@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import currencySlice from './currencySlice';
+import currencySlice from './currency/currencySlice';
 import loginRegisterSlice from './login/loginRegisterSlice';
 import loaderSlice from './loader/loaderSlice';
+import userSlice from './user/userSlice'
 export default configureStore({
     reducer: {
         currencyStore: currencySlice,
         loginRegisterStore: loginRegisterSlice,
-        loaderStore  : loaderSlice
-    
+        loaderStore  : loaderSlice,
+        userStore : userSlice
+       
     },
 });

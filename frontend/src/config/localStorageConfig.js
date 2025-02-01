@@ -1,4 +1,4 @@
 export const localStorageConfig = {
-
-    CURRENCY: 'currency'
-}
+    USER: 'user',
+    CURRENCY: 'currency',
+};

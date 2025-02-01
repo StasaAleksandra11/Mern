@@ -1,27 +1,65 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { routesConfig } from '../../config/routesConfig';
 import './Navigation.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrencyAction } from '../../store/currencySlice';
+import { setCurrencyAction } from '../../store/currency/currencySlice';
 import { useEffect } from 'react';
 import { toggleLoginFormAction } from '../../store/login/loginRegisterSlice';
 import { localStorageConfig } from '../../config/localStorageConfig';
+import { IoIosArrowDown } from 'react-icons/io';
+import { removeUserAction } from '../../store/user/userSlice';
 
 function Navigations() {
-
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { currency, symbol } = useSelector((state) => state.currencyStore);
     const { isLoginForm } = useSelector((state) => state.loginRegisterStore);
-    useEffect(()=> {
-        localStorage.setItem(localStorageConfig.CURRENCY, currency)
-    },[currency])
+    const { user } = useSelector((state) => state.userStore);
+    useEffect(() => {
+        localStorage.setItem(localStorageConfig.CURRENCY, currency);
+    }, [currency]);
 
     const changeCurrency = (e) => {
         dispatch(setCurrencyAction(e.target.value));
     };
     const changeToggleView = () => {
-      dispatch(toggleLoginFormAction(!isLoginForm))
-    }
+        dispatch(toggleLoginFormAction(!isLoginForm));
+    };
+
+    const userLogout = () => {
+        localStorage.removeItem(localStorageConfig.USER);
+        dispatch(removeUserAction());
+        navigate(routesConfig.AUTHORIZATION.url);
+    };
+
+    const NavigationView = () => {
+        return localStorage.getItem(localStorageConfig.USER) ? (
+            <div className='dropdown'>
+                <li className='dopbtn'>
+                    <a>{user.username}</a>
+                    <IoIosArrowDown />
+                    <div className='dropdown-content'>
+                        <li>
+                            <NavLink>Profile</NavLink>
+                        </li>
+                        <li onClick={userLogout}>
+                            <a>Logout</a>
+                        </li>
+                    </div>
+                </li>
+            </div>
+        ) : (
+            <>
+                {' '}
+                <li>
+                    <NavLink to={routesConfig.AUTHORIZATION.url} onClick={changeToggleView}>
+                        {isLoginForm ? 'Register' : 'Login'}
+                    </NavLink>
+                </li>
+            </>
+        );
+    };
+
     return (
         <>
             <header>
@@ -44,9 +82,7 @@ function Navigations() {
                                 <li>
                                     <NavLink to={routesConfig.CONTACT.url}>Contact</NavLink>
                                 </li>
-                                <li>
-                                    <NavLink to={routesConfig.AUTHORIZATION.url} onClick={changeToggleView}>{isLoginForm ? 'Register' : 'Login'}</NavLink>
-                                </li>
+                                {NavigationView()}
                             </ul>
                         </div>
                     </div>
