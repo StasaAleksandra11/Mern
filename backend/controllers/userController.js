@@ -42,11 +42,10 @@ exports.login = async (req, res, next) => {
     if (!isCorrectPassword) return next(new AppError('netacni kredencijali', 401));
 
     //izbacujemo password pre slanja na front
-    const { password, ...userData } = user.toObject();
+    const { password, _id, __v, ...userData } = user.toObject();
 
     return res.status(200).json({
         status: 'success',
-        message: 'Uspesno ste se logovali',
         user: userData,
     });
 };

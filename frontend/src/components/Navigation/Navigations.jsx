@@ -32,6 +32,8 @@ function Navigations() {
         navigate(routesConfig.AUTHORIZATION.url);
     };
 
+  
+
     const NavigationView = () => {
         return localStorage.getItem(localStorageConfig.USER) ? (
             <div className='dropdown'>
@@ -42,6 +44,9 @@ function Navigations() {
                         <li>
                             <NavLink>Profile</NavLink>
                         </li>
+                        {user.role === 'admin' && <li>
+                            <NavLink to={routesConfig.DASHBOARD.url }>Dashboard</NavLink>
+                            </li>}
                         <li onClick={userLogout}>
                             <a>Logout</a>
                         </li>
