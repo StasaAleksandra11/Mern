@@ -15,6 +15,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUserAction } from './store/user/userSlice.js';
 import AdminProtect from './adminComponents/adminProtect/AdminProtect.jsx';
 import { isDashboardAction } from './store/dashboard/dashboardSlice.js';
+import AddProduct from './adminComponents/AddProduct/AddProduct.jsx';
+import Statistic from './adminComponents/Statistic/Statistic.jsx';
+import Users from './adminComponents/Users/Users.jsx';
+import Comments from './adminComponents/Comments/Comments.jsx';
 
 function App() {
     const dispatch = useDispatch();
@@ -27,7 +31,7 @@ function App() {
 
     useEffect(() => {
         console.log(location, 'locatioon');
-        if (location.pathname === '/dashboard') dispatch(isDashboardAction(true));
+        if (location.pathname.startsWith('/dashboard')) dispatch(isDashboardAction(true));
         else dispatch(isDashboardAction(false));
     }, [location, dispatch]);
 
@@ -47,8 +51,14 @@ function App() {
                             <DashboardPage />
                         </AdminProtect>
                     }
-                />
+                >
+                    <Route index element={<Statistic/>}/>
+                    <Route path={routesConfig.DASHBOARD_ADD_PRODUCT.url} element={<AddProduct/>}/>
+                    <Route path={routesConfig.DASHBOARD_USERS.url} element={<Users/>}/>
+                    <Route path={routesConfig.DASHBOARD_COMMENTS.url} element={<Comments/>}/>
+                </Route>
             </Routes>
+        
             <ToastContainer />
         </>
     );

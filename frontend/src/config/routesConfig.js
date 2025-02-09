@@ -9,6 +9,15 @@ export const routesConfig = {
         url: '/authorization',
     },
     DASHBOARD: {
-        url: '/dashboard'
-    }
+        url: '/dashboard',
+    },
+    DASHBOARD_ADD_PRODUCT: {
+        url: 'add-product',
+    },
+    DASHBOARD_USERS: {
+        url: 'users',
+    },
+    DASHBOARD_COMMENTS: {
+        url: 'comments',
+    },
 };
