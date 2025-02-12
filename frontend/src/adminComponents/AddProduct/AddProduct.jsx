@@ -1,13 +1,15 @@
 import Label from '../../components//Label/Label.jsx';
 import Input from '../../components/Input/Input.jsx';
 import Button from '../../components/Button/Button.jsx';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { addProduct } from '../../services/adminService.js';
 import { useDispatch } from 'react-redux';
 import { showLoaderAction } from '../../store/loader/loaderSlice.js';
-import './addProduct.scss'
+import { toast } from 'react-toastify';
+import './addProduct.scss';
 function AddProduct() {
     const dispatch = useDispatch();
+    const formRef = useRef();
     const [file, setFile] = useState(null);
     const [product, setProduct] = useState({
         title: '',
@@ -30,9 +32,20 @@ function AddProduct() {
         newProduct.append('file', file);
         dispatch(showLoaderAction(true));
         const res = await addProduct(newProduct);
-        console.log(res, 'res iz servisa');
-
         dispatch(showLoaderAction(false));
+        if (res.status === 'success') {
+            formRef.current.reset();
+            setProduct({
+                title: '',
+                description: '',
+                price: '',
+            });
+            setFile(null);
+            toast.success(res.message);
+        } else {
+            toast.error(res.message);
+        }
+       
     };
 
     return (
@@ -42,7 +55,7 @@ function AddProduct() {
                 <div className='content'>
                     <h1>Add product</h1>
                 </div>
-                <form onSubmit={handleSubmit} className='add-product-form'>
+                <form onSubmit={handleSubmit} ref={formRef} className='add-product-form'>
                     <div className='input-wrapper'>
                         <Label htmlFor='title'>Title</Label>
                         <Input type='text' id='title' placeholder='input product title' onChange={handleChange} />
@@ -53,7 +66,7 @@ function AddProduct() {
                     </div>
                     <div className='input-wrapper'>
                         <Label htmlFor='title'>Price</Label>
-                        <Input type='number' id='price' placeholder='input product price' onChange={handleChange} />
+                        <Input type='number' id='price' placeholder='input product price in EURO' onChange={handleChange} />
                     </div>
                     <div className='input-wrapper'>
                         <Label htmlFor='title'>Image</Label>

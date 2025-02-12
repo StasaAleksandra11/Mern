@@ -19,6 +19,7 @@ import AddProduct from './adminComponents/AddProduct/AddProduct.jsx';
 import Statistic from './adminComponents/Statistic/Statistic.jsx';
 import Users from './adminComponents/Users/Users.jsx';
 import Comments from './adminComponents/Comments/Comments.jsx';
+import SingleProduct from './pages/SingleProduct/SingleProduct.jsx';
 
 function App() {
     const dispatch = useDispatch();
@@ -30,7 +31,6 @@ function App() {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log(location, 'locatioon');
         if (location.pathname.startsWith('/dashboard')) dispatch(isDashboardAction(true));
         else dispatch(isDashboardAction(false));
     }, [location, dispatch]);
@@ -44,6 +44,7 @@ function App() {
                 <Route path={routesConfig.SHOP.url} element={<ShopPage />} />
                 <Route path={routesConfig.CONTACT.url} element={<ContactPage />} />
                 <Route path={routesConfig.AUTHORIZATION.url} element={<AuthorizationPage />} />
+                <Route path={routesConfig.SINGLE_PRODUCT.url} element={<SingleProduct />} />
                 <Route
                     path={routesConfig.DASHBOARD.url}
                     element={
@@ -52,13 +53,13 @@ function App() {
                         </AdminProtect>
                     }
                 >
-                    <Route index element={<Statistic/>}/>
-                    <Route path={routesConfig.DASHBOARD_ADD_PRODUCT.url} element={<AddProduct/>}/>
-                    <Route path={routesConfig.DASHBOARD_USERS.url} element={<Users/>}/>
-                    <Route path={routesConfig.DASHBOARD_COMMENTS.url} element={<Comments/>}/>
+                    <Route index element={<Statistic />} />
+                    <Route path={routesConfig.DASHBOARD_ADD_PRODUCT.url} element={<AddProduct />} />
+                    <Route path={routesConfig.DASHBOARD_USERS.url} element={<Users />} />
+                    <Route path={routesConfig.DASHBOARD_COMMENTS.url} element={<Comments />} />
                 </Route>
             </Routes>
-        
+
             <ToastContainer />
         </>
     );

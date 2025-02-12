@@ -75,9 +75,8 @@ function Navigations() {
                             <select name='currency' id='currency' defaultValue={currency} onChange={changeCurrency}>
                                 <option value='EUR'>EUR</option>
                                 <option value='USD'>USD</option>
-                                <option value='DIN'>DI</option>
+                                <option value='DIN'>DIN</option>
                             </select>
-                            <span> {symbol}</span>
                         </div>
                         <div className='navigation'>
                             <ul>

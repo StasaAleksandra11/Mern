@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { adminSidebarConfig } from '../../config/adminSidebarConfig';
 import './sidebar.scss';
 import { useNavigate } from 'react-router-dom';
-
+import { routesConfig } from '../../config/routesConfig';
+import { Link } from 'react-router'
 function SidebarComponent() {
     const navigate = useNavigate()
     const [activeItem, setActiveItem] = useState(adminSidebarConfig[0].name);
@@ -27,7 +28,8 @@ function SidebarComponent() {
             <div className='sidebar-wrapper'>
                 <div className='sidebar'>
                     <div className='header'>
-                        <h3>Admin Dashboard</h3>
+                        <h3>Dashboard / </h3>
+                        <h3><Link to={routesConfig.SHOP.url}>HOME</Link></h3>
                     </div>
                     <div className='navigation'>
                         <nav>

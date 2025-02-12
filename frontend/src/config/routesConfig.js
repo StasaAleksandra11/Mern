@@ -2,6 +2,12 @@ export const routesConfig = {
     SHOP: {
         url: '/',
     },
+    SINGLE_PRODUCT: {
+        url: '/product/:productID',
+        dinamicURL: (productID) => {
+            return `/product/${productID}`;
+        },
+    },
     CONTACT: {
         url: '/contact',
     },

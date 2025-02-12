@@ -51,8 +51,6 @@ function RegisterForm() {
         const res = await register(data);
         dispatch(showLoaderAction(false));
         // setLoader(false)
-        console.log(res, 'res iz servisa');
-
         if (res.status === 'success') {
             toast.success(res.message);
             dispatch(showLoginForm());
