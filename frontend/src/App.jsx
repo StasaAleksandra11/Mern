@@ -19,7 +19,9 @@ import AddProduct from './adminComponents/AddProduct/AddProduct.jsx';
 import Statistic from './adminComponents/Statistic/Statistic.jsx';
 import Users from './adminComponents/Users/Users.jsx';
 import Comments from './adminComponents/Comments/Comments.jsx';
-import SingleProduct from './pages/SingleProduct/SingleProduct.jsx';
+import SingleProductPage from './pages/SingleProductPage/SingleProductPage.jsx';
+import OrderPage from './pages/Order/OrderPage.jsx';
+
 
 function App() {
     const dispatch = useDispatch();
@@ -44,7 +46,8 @@ function App() {
                 <Route path={routesConfig.SHOP.url} element={<ShopPage />} />
                 <Route path={routesConfig.CONTACT.url} element={<ContactPage />} />
                 <Route path={routesConfig.AUTHORIZATION.url} element={<AuthorizationPage />} />
-                <Route path={routesConfig.SINGLE_PRODUCT.url} element={<SingleProduct />} />
+                <Route path={routesConfig.SINGLE_PRODUCT.url} element={<SingleProductPage />} />
+                <Route path={routesConfig.ORDER.url} element={<OrderPage/>} />
                 <Route
                     path={routesConfig.DASHBOARD.url}
                     element={

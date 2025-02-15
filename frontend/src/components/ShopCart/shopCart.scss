@@ -1,0 +1,50 @@
+@use '../../assets/sass/main.scss';
+
+.shop-cart {
+    position: relative;
+
+    svg {
+        display: inline;
+    }
+
+    .shop-cart-badge {
+        position: absolute;
+        background-color: tomato;
+        padding: 0 10px;
+        color: #fff;
+        border-radius: 50%;
+        top: 12px;
+    }
+    .shop-cart-summary {
+        position: absolute;
+        padding: 10px;
+        background-color: #eee;
+        right: 0;
+        z-index: 10;
+
+        .shop-cart-items{
+            max-height: 400px;
+
+
+            .shop-cart-item{
+                   display: grid;
+                   grid-template-columns: auto 1fr auto;
+                   gap: 10px;
+                  img{
+                    height: 50px;
+                    width: 50px;
+                    object-fit: contain;
+                  }
+
+                  .content{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    .count{
+                        display: flex;
+                    }
+                  }
+            }
+        }
+    }
+}

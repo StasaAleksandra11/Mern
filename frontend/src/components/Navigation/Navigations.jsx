@@ -8,6 +8,7 @@ import { toggleLoginFormAction } from '../../store/login/loginRegisterSlice';
 import { localStorageConfig } from '../../config/localStorageConfig';
 import { IoIosArrowDown } from 'react-icons/io';
 import { removeUserAction } from '../../store/user/userSlice';
+import ShopCart from '../ShopCart/ShopCart';
 
 function Navigations() {
     const dispatch = useDispatch();
@@ -85,6 +86,9 @@ function Navigations() {
                                 </li>
                                 <li>
                                     <NavLink to={routesConfig.CONTACT.url}>Contact</NavLink>
+                                </li>
+                                <li>
+                                    <ShopCart/>
                                 </li>
                                 {NavigationView()}
                             </ul>

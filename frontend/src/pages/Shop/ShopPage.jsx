@@ -25,7 +25,7 @@ function ShopPage() {
 
     return (
         <>
-            <div className='container'>
+            <div className='container mt-4'>
                 <div className='row'>
                     {products.length > 0 &&
                         products.map((product, index) => {
@@ -45,7 +45,7 @@ function ShopPage() {
                                             <Link to={routesConfig.SINGLE_PRODUCT.dinamicURL(product._id)}>
                                                 <button className='btn btn-primary'>View Product</button>
                                             </Link>
-                                            <span className='text-uted'>{convertPrice(product.price)}</span>
+                                            <span className='badge bg-success py-3'>{convertPrice(product.price)}</span>
                                         </div>
                                     </div>
                                 </div>
