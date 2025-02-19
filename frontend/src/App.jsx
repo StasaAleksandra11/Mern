@@ -21,11 +21,12 @@ import Users from './adminComponents/Users/Users.jsx';
 import Comments from './adminComponents/Comments/Comments.jsx';
 import SingleProductPage from './pages/SingleProductPage/SingleProductPage.jsx';
 import OrderPage from './pages/Order/OrderPage.jsx';
-
+import { setCart } from './store/cart/cartSlice.js';
 
 function App() {
     const dispatch = useDispatch();
     const location = useLocation();
+   
     const { isDashboard } = useSelector((state) => state.dashboardStore);
     useEffect(() => {
         const userString = localStorage.getItem(localStorageConfig.USER);
@@ -37,6 +38,12 @@ function App() {
         else dispatch(isDashboardAction(false));
     }, [location, dispatch]);
 
+    useEffect(() => {
+        if (Object.prototype.hasOwnProperty.call(localStorage, localStorageConfig.CART))
+            dispatch(setCart(JSON.parse(localStorage.getItem(localStorageConfig.CART))));
+       
+    }, [dispatch]);
+
     return (
         <>
             <LoaderComponent />
@@ -47,7 +54,7 @@ function App() {
                 <Route path={routesConfig.CONTACT.url} element={<ContactPage />} />
                 <Route path={routesConfig.AUTHORIZATION.url} element={<AuthorizationPage />} />
                 <Route path={routesConfig.SINGLE_PRODUCT.url} element={<SingleProductPage />} />
-                <Route path={routesConfig.ORDER.url} element={<OrderPage/>} />
+                <Route path={routesConfig.ORDER.url} element={<OrderPage />} />
                 <Route
                     path={routesConfig.DASHBOARD.url}
                     element={

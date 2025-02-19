@@ -2,16 +2,32 @@ import { IoCartSharp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { routesConfig } from '../../config/routesConfig';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {FaMinusCircle, FaPlusCircle, FaTrashAlt} from 'react-icons/fa'
 import './shopCart.scss';
+import useCurrencyConverter from '../../utils/useCurrencyConverter';
+import { toast } from 'react-toastify';
+import { setNewOld, removeItem, handleCountItem } from '../../store/cart/cartSlice';
+import { localStorageConfig } from '../../config/localStorageConfig';
 
 function ShopCart() {
+    const dispatch = useDispatch()
     const [isSumary, setIsSummary] = useState(false);
     const { cart } = useSelector((state) => state.cartStore);
+    const {isNewItem} = useSelector((state) =>state.cartStore)
+    const {isOldItem} = useSelector((state) =>state.cartStore)
+    const convertPrice = useCurrencyConverter()
  
     useEffect(() => {
         console.log(cart, 'cart');
-    }, [cart])
+        isNewItem && toast.success('New product Added')
+        isOldItem && toast.warning('You increased this product quantity')
+        dispatch(setNewOld())
+    }, [cart, isNewItem, isOldItem, dispatch])
+
+    useEffect(()=> {
+        if(cart.length) localStorage.setItem(localStorageConfig.CART, JSON.stringify(cart))
+    },[cart])
 
 
     const displayAllItems = () => {
@@ -24,12 +40,16 @@ function ShopCart() {
                 <div className='title'>{item.title}</div>
                 <div className='count'>
                     <span>Count: </span>
-                    <span>+</span>
-                    <span>1</span>
-                    <span>-</span>
+                    <span> 
+                    <FaMinusCircle onClick={() => dispatch(handleCountItem({index, isIncrease : false}))}/> 
+                    </span>
+                    <span>{item.count}</span>
+                    <span>
+                        <FaPlusCircle onClick={() => dispatch(handleCountItem({index, isIncrease : true}))}/>
+                    </span>
                 </div>
-                <div className="price">Total: $1344</div>
-                <div className='remove'>Remove</div>
+                <div className="price">Total: {convertPrice(item.totalPrice)}</div>
+                <div className='remove' onClick={() => dispatch(removeItem(index))} ><FaTrashAlt/></div>
             </div>
           </div>
         })
