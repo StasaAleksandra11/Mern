@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import {FaMinusCircle, FaPlusCircle, FaTrashAlt} from 'react-icons/fa'
 import { handleCountItem, removeItem } from "../../store/cart/cartSlice"
 import useCurrencyConverter from "../../utils/useCurrencyConverter"
+import './orderProcessStepOne.scss'
 
 function OrderProcessSteoOne() {
   const dispatch = useDispatch() 
@@ -16,6 +17,7 @@ function OrderProcessSteoOne() {
         <td>
           <img src={`http://localhost:4000/uploads/${item.image}`} alt="{item.title}"  />
           </td>
+          <td>{item.title}</td>
           <td>
           <span> 
                     <FaMinusCircle onClick={() => dispatch(handleCountItem({index, isIncrease : false}))}/> 

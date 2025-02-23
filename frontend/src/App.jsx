@@ -26,6 +26,8 @@ import { setCart } from './store/cart/cartSlice.js';
 function App() {
     const dispatch = useDispatch();
     const location = useLocation();
+  
+   
    
     const { isDashboard } = useSelector((state) => state.dashboardStore);
     useEffect(() => {
@@ -43,6 +45,11 @@ function App() {
             dispatch(setCart(JSON.parse(localStorage.getItem(localStorageConfig.CART))));
        
     }, [dispatch]);
+
+    
+   
+
+ 
 
     return (
         <>

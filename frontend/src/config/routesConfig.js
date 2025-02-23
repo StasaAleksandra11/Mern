@@ -12,7 +12,7 @@ export const routesConfig = {
         url: '/contact',
     },
     ORDER: {
-        url: '/order,',
+        url: '/order',
     },
     AUTHORIZATION: {
         url: '/authorization',

@@ -5,6 +5,7 @@ const path = require('path');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const productRoutes = require('./routes/productRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/AppError');
 
@@ -19,6 +20,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/user', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/product', productRoutes);
+app.use('/api/payment', paymentRoutes)
 
 // app.post('/api/email', (req, res, next)=> {
 //     const user = req.body
