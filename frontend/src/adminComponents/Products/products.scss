@@ -1,0 +1,72 @@
+.btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+
+    &-warning {
+        background-color: #ffc107;
+        color: #212529;
+
+        &:hover {
+            background-color: darken(#ffc107, 10%);
+        }
+    }
+
+    &-danger {
+        background-color: #dc3545;
+        color: #fff;
+
+        &:hover {
+            background-color: darken(#dc3545, 10%);
+        }
+    }
+}
+
+.btns-wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.table-product {
+    position: absolute;
+    top: 0;
+    height: 100vh; // Zauzima punu visinu ekrana
+    overflow-y: auto; // Omogućava vertikalni scroll
+    overflow-x: hidden; // Sprečava horizontalni scroll
+    background-color: #212529; // Pozadina kao kod dark-themed tabela
+    padding: 1rem;
+
+    table {
+        width: 100%; // Ispunjava maksimalni prostor
+        border-collapse: collapse;
+    }
+
+    thead {
+        position: sticky;
+        top: 0;
+        background-color: #3e5879; // Boja da se poklapa sa sidebar-om
+        z-index: 10;
+    }
+
+    tbody {
+        display: block;
+        overflow-y: auto;
+    }
+
+    tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+}
+
+

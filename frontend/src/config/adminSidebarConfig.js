@@ -10,9 +10,9 @@ export const adminSidebarConfig = [
     url: 'add-product'
    },
    {
-    name: 'Users',
-    icon: 'ion-person',
-    url: 'users'
+    name: 'Products',
+    icon: 'ion-cube',
+    url: 'products'
    },
    {
     name: 'Comments',

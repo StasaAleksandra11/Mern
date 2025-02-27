@@ -23,10 +23,10 @@ export const routesConfig = {
     DASHBOARD_ADD_PRODUCT: {
         url: 'add-product',
     },
-    DASHBOARD_USERS: {
-        url: 'users',
+    DASHBOARD_PRODUCTS: {
+        url: 'products',
     },
     DASHBOARD_COMMENTS: {
         url: 'comments',
-    },
+    }
 };

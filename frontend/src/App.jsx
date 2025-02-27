@@ -17,11 +17,11 @@ import AdminProtect from './adminComponents/adminProtect/AdminProtect.jsx';
 import { isDashboardAction } from './store/dashboard/dashboardSlice.js';
 import AddProduct from './adminComponents/AddProduct/AddProduct.jsx';
 import Statistic from './adminComponents/Statistic/Statistic.jsx';
-import Users from './adminComponents/Users/Users.jsx';
 import Comments from './adminComponents/Comments/Comments.jsx';
 import SingleProductPage from './pages/SingleProductPage/SingleProductPage.jsx';
 import OrderPage from './pages/Order/OrderPage.jsx';
 import { setCart } from './store/cart/cartSlice.js';
+import Products from './adminComponents/Products/Products.jsx'
 
 function App() {
     const dispatch = useDispatch();
@@ -72,7 +72,7 @@ function App() {
                 >
                     <Route index element={<Statistic />} />
                     <Route path={routesConfig.DASHBOARD_ADD_PRODUCT.url} element={<AddProduct />} />
-                    <Route path={routesConfig.DASHBOARD_USERS.url} element={<Users />} />
+                    <Route path={routesConfig.DASHBOARD_PRODUCTS.url} element={<Products/>} />
                     <Route path={routesConfig.DASHBOARD_COMMENTS.url} element={<Comments />} />
                 </Route>
             </Routes>

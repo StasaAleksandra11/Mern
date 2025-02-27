@@ -2,6 +2,7 @@ const Users = require('../models/userModel');
 const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
 const Email = require('../utils/Email');
+const signToken = require('../utils/signToken');
 
 //-----------------------
 //----REGISTER-----------
@@ -43,9 +44,13 @@ exports.login = async (req, res, next) => {
 
     //izbacujemo password pre slanja na front
     const { password, _id, __v, ...userData } = user.toObject();
+     const token = signToken(user._id)
+     console.log(token, 'token');
+     
 
     return res.status(200).json({
         status: 'success',
         user: userData,
+        token
     });
 };

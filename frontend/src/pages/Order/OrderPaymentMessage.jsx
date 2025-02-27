@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setCart } from '../../store/cart/cartSlice';
 import { useNavigate } from 'react-router-dom';
 import { routesConfig } from '../../config/routesConfig';
+import { localStorageConfig } from '../../config/localStorageConfig';
 
 function OrderPaymentMessage(  {paymentMessage} ) {
     const dispatch = useDispatch();
@@ -10,6 +11,7 @@ function OrderPaymentMessage(  {paymentMessage} ) {
     useEffect(() => {
         if (paymentMessage === 'succeeded') {
             dispatch(setCart([]));
+            localStorage.removeItem(localStorageConfig.CART)
             setTimeout(() => navigate(routesConfig.SHOP.url), 5000);
         }
     },[dispatch, paymentMessage,navigate]);

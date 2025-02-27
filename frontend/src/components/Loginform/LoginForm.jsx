@@ -15,7 +15,7 @@ import { showLoaderAction } from '../../store/loader/loaderSlice';
 import { toast } from 'react-toastify';
 import { routesConfig } from '../../config/routesConfig';
 import { localStorageConfig } from '../../config/localStorageConfig';
-import {setUserAction} from '../../store/user/userSlice'
+import { setUserAction } from '../../store/user/userSlice';
 function LoginForm() {
     const dispatch = useDispatch();
     const [isEmail, setIsEmail] = useState(true);
@@ -44,9 +44,12 @@ function LoginForm() {
         dispatch(showLoaderAction(true));
         const res = await login(data);
         dispatch(showLoaderAction(false));
+        console.log(res, 'res sa fronta');
+        
         if (res.status === 'success') {
-            localStorage.setItem(localStorageConfig.USER, JSON.stringify(res.user))
-            dispatch(setUserAction(res.user))
+            localStorage.setItem(localStorageConfig.USER, JSON.stringify(res.user));
+            localStorage.setItem(localStorageConfig.TOKEN, res.token);
+            dispatch(setUserAction(res.user));
             navigate(routesConfig.SHOP.url);
         } else {
             toast.error(res.message);

@@ -30,11 +30,13 @@ export const login = async (user) => {
             return {
                 status: res.data.status,
                 user: res.data.user,
+                token: res.data.token
             };
         }
         return {
             status: res.data.status,
             message: res.data.message,
+            token: res.data.token,
         };
     } catch (err) {
         return {
