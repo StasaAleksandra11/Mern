@@ -6,6 +6,7 @@ const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const productRoutes = require('./routes/productRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const commentRoutes = require('./routes/commentRoutes')
 const errorController = require('./controllers/errorController');
 const AppError = require('./utils/AppError');
 
@@ -13,19 +14,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 
-
 //ucitaj mi staticke fajlove
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // * Routes
-
-
-
 
 app.use('/api/user', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/payment', paymentRoutes);
-
+app.use('/api/comment', commentRoutes);
 // app.post('/api/email', (req, res, next)=> {
 //     const user = req.body
 //     console.log(user, 'user');

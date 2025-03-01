@@ -5,6 +5,7 @@ import { showLoaderAction } from '../../store/loader/loaderSlice';
 import { getSingleProduct } from '../../services/productService';
 import useCurrencyConverter from '../../utils/useCurrencyConverter';
 import { addCart } from '../../store/cart/cartSlice';
+import LeaveComment from '../../components/LeaveComment/LeaveComment';
 
 function SingleProductPage() {
     const params = useParams();
@@ -41,6 +42,7 @@ function SingleProductPage() {
               </div>
         </div>
     ) }
+    {product && <LeaveComment product={product}/>}
    </div>
     </>
 }
