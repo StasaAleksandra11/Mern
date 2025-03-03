@@ -34,7 +34,7 @@ function ShopCart() {
         return cart.map((item, index) => {
           return <div className='shop-cart-item' key={index}>
             <img 
-            src={`https://backendmern-avj0.onrender.com/uploads/${item.image}`}
+            src={`https://backendmern-vtsf.onrender.com/uploads/${item.image}`}
             alt={item.title} />
             <div className='content'>
                 <div className='title'>{item.title}</div>
