@@ -22,7 +22,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     // DA LI POSTOJI KORISNIK SA OVIM TOKENOM
 
     const freshUser = await Users.findById(decoded.id);
-    console.log(freshUser, 'freshUser');
+    
 
      //  NA KRAJU CEMO DA ETUJEMO KORISNIKA I DA ASTAVIMO SLEDECI MIDDLEWARE
     

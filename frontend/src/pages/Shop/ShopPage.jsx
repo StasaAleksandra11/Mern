@@ -18,7 +18,7 @@ function ShopPage() {
             if (res.status === 'success') {
                 setProducts(res.products);
             }
-            console.log(res, 'res sa fronta');
+           
         };
         fetchProduct();
     }, [dispatch]);

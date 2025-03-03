@@ -17,7 +17,7 @@ function SingleProductPage() {
       const fetchSingleProduct = async () => {
        dispatch(showLoaderAction(true))
         const res = await getSingleProduct(params.productID)
-        console.log(res, 'res sa fronta');
+       
         if(res.status === 'success') setProduct(res.product)
         
         dispatch(showLoaderAction(false))

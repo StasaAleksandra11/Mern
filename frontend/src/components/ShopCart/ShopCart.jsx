@@ -19,7 +19,7 @@ function ShopCart() {
     const convertPrice = useCurrencyConverter()
  
     useEffect(() => {
-        console.log(cart, 'cart');
+       
         isNewItem && toast.success('New product Added')
         isOldItem && toast.warning('You increased this product quantity')
         dispatch(setNewOld())

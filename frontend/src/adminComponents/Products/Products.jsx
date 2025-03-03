@@ -4,9 +4,11 @@ import { useDispatch } from 'react-redux';
 import { showLoaderAction } from '../../store/loader/loaderSlice';
 import './products.scss';
 import DeleteProductModal from './Modals/DeleteProductModal';
+import EditProductModal from './Modals/EditProductModal';
 function Products() {
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
+    const [isEditModal, setIsEditModal] = useState(false)
     const [isDeleteModal, setIsDeleteModal] = useState(false);
     const [currentProduct, setCurrentProduct] = useState([]);
 
@@ -17,7 +19,7 @@ function Products() {
         dispatch(showLoaderAction(false));
 
         if (res.status === 'success') setProducts(res.products);
-        console.log(res, 'res iz productaaaa');
+       
     };
 
 
@@ -37,7 +39,7 @@ function Products() {
                     <th>{product.price}</th>
                     <td>
                         <div className='btns-wrapper'>
-                            <button className='btn btn-warning'>Edit</button>
+                            <button className='btn btn-warning' onClick={() => editProduct(product)}>Edit</button>
                             <button className='btn btn-danger' onClick={() => deleteProduct(product)}>
                                 Delete
                             </button>
@@ -47,6 +49,11 @@ function Products() {
             );
         });
     };
+
+    const editProduct = (product) => {
+       setIsEditModal(true)
+       setCurrentProduct(product)
+    }
 
     const deleteProduct = (product) => {
         setIsDeleteModal(true);
@@ -69,6 +76,9 @@ function Products() {
                     <tbody>{products && displayProductView()}</tbody>
                 </table>
             </div>
+            {
+                isEditModal && <EditProductModal setIsEditModal={setIsEditModal} currentProduct={currentProduct} fetchProduct={fetchProduct} />
+            }
             {isDeleteModal &&   <DeleteProductModal  setIsDeleteModal={setIsDeleteModal} currentProduct={currentProduct} fetchProduct={fetchProduct} />}
         </>
     );

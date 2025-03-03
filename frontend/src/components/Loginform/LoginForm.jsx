@@ -44,7 +44,7 @@ function LoginForm() {
         dispatch(showLoaderAction(true));
         const res = await login(data);
         dispatch(showLoaderAction(false));
-        console.log(res, 'res sa fronta');
+      
         
         if (res.status === 'success') {
             localStorage.setItem(localStorageConfig.USER, JSON.stringify(res.user));

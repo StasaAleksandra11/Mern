@@ -24,7 +24,7 @@ function OrderProcessStepTwo() {
             const res = await makePayment({ amount: total, currency: 'eur' });
             dispatch(showLoaderAction(false));
             if (res.status === 'success') setSecretKey(res.secretKey);
-            console.log(res, 'res sa fronta make Payment');
+           
         };
         fetchPayment();
     }, [dispatch, cart]);

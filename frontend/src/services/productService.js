@@ -2,7 +2,7 @@ import axios from 'axios';
 export const getAllProduct = async () => {
     try {
         const res = await axios.get('/api/product');
-        console.log(res, 'res  iz servisa');
+       
 
         if (res.status === 200 && res.data.status === 'success') {
             return {
@@ -21,7 +21,7 @@ export const getAllProduct = async () => {
 export const getSingleProduct = async (productID) => {
     try {
         const res = await axios.get(`/api/product/single/${productID}`);
-        console.log(res, 'res za single product');
+ 
         if (res.status === 200 && res.data.status === 'success') {
             return {
                 status: res.data.status,

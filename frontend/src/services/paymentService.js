@@ -4,7 +4,7 @@ export const makePayment = async (paymentInfo) => {
     
   try {
    const res  = await axios.post('/api/payment', paymentInfo)    
-   console.log(res, 'res iz servisa payment');
+  
    if(res.status === 200 && res.data.status === 'success'){
     return {
         status: res.data.status,

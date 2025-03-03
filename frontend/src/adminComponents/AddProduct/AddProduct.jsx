@@ -50,7 +50,7 @@ function AddProduct() {
 
     return (
         <>
-            {console.log(product, 'product')}
+            
             <div className='add-product-wrapper'>
                 <div className='content'>
                     <h1>Add product</h1>

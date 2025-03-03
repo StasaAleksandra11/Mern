@@ -14,7 +14,6 @@ const sendErrorProd = (err, res) => {
             message: err.message,
         });
     } else {
-        console.error(err, 'Nepoznata greska');
         res.status(500).json({
             status: 'error',
             message: 'Greska je na serveru, pokusajte ponovo',

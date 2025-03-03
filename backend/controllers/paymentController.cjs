@@ -1,7 +1,7 @@
-const stripe = require('stripe')
+const stripe = require('stripe');
 const stripeSK = stripe(process.env.STRIPE_SECRET_KEY);
-const AppError = require('../utils/AppError')
-const catchAsync = require('../utils/catchAsync')
+const AppError = require('../utils/AppError');
+const catchAsync = require('../utils/catchAsync');
 
 exports.makePayment = catchAsync(async (req, res, next) => {
     if (!req.body.amount || !req.body.currency) return next(new AppError('suma i valuta su neophodni', 400));
@@ -12,10 +12,8 @@ exports.makePayment = catchAsync(async (req, res, next) => {
             enabled: true,
         },
     });
-    console.log(paymentIntents, 'payment i');
-    console.log( paymentIntents.client_secret,' paymentIntents.client_secret');
-    
-    
+
+
     res.status(200).json({
         status: 'success',
         secretKey: paymentIntents.client_secret,

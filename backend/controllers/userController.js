@@ -38,19 +38,16 @@ exports.login = async (req, res, next) => {
 
     //proveravamo password
     const isCorrectPassword = await user.isCorrectPassword(req.body.password, user.password);
-    console.log(isCorrectPassword, 'isCorrect');
 
     if (!isCorrectPassword) return next(new AppError('netacni kredencijali', 401));
 
     //izbacujemo password pre slanja na front
     const { password, _id, __v, ...userData } = user.toObject();
-     const token = signToken(user._id)
-     console.log(token, 'token');
-     
+    const token = signToken(user._id);
 
     return res.status(200).json({
         status: 'success',
         user: userData,
-        token
+        token,
     });
 };

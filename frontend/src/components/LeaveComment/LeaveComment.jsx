@@ -6,7 +6,7 @@ import { showLoaderAction } from '../../store/loader/loaderSlice';
 import { addComment, getProductComments } from '../../services/commentService';
 import { toast } from 'react-toastify';
 import { formatDate } from '../../utils/formatDate';
-
+import './LeaveComment.scss';
 function LeaveComment({ product }) {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.userStore);
@@ -36,8 +36,8 @@ function LeaveComment({ product }) {
         if (res.status === 'success') {
             setAllComment(res.allComments.filter((comment) => comment.status));
         }
-        console.log(res, 'res iz get product frontaaaaaaa');
-    }, [ dispatch, product._id])
+       
+    }, [dispatch, product._id]);
 
     useEffect(() => {
         if (product && product._id) fetchComments();
@@ -84,14 +84,11 @@ function LeaveComment({ product }) {
                 ? allComment.map((comment, index) => {
                       return (
                           <div className='comment' key={index}>
-                              <div className='d-flex justify-content-between align-items-center'>
+                              <div className='comment-content'>
                                   <p>{comment.author}</p>
-                                  <p>{formatDate(comment.date)}</p>
-                                  <hr />
-                                  <div>
-                                      <p className='comment-body'>{comment.comment}</p>
-                                  </div>
+                                  <p className='comment-body'>{comment.comment}</p>
                               </div>
+                              <p className='comment-date'>{formatDate(comment.date)}</p>
                           </div>
                       );
                   })
