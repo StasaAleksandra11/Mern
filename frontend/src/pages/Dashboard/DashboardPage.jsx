@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 import { isDashboardAction } from "../../store/dashboard/dashboardSlice"
 import { useEffect } from "react"
-import SidebarComponent from "../../adminComponents/SideBar/SidebarComponent.jsx"
+import SidebarComponent from "../../adminComponents/Sidebar/SidebarComponent"
 import { Outlet } from "react-router-dom"
 
 
