@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux"
 import { isDashboardAction } from "../../store/dashboard/dashboardSlice"
 import { useEffect } from "react"
-import SidebarComponent from "../../adminComponents/SideBar/SideBarComponent"
+import SidebarComponent from "../../adminComponents/SideBar/SidebarComponent.jsx"
 import { Outlet } from "react-router-dom"
+
 
 
 
@@ -25,7 +26,7 @@ function DashboardPage() {
         <SidebarComponent/>
       </div>
       <div className="col-md-9 p-0">
-        <Outlet/>
+       <Outlet/>
       </div>
       </div>
     </div>

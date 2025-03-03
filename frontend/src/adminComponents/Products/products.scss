@@ -12,7 +12,7 @@
         color: #212529;
 
         &:hover {
-            background-color: darken(#ffc107, 10%);
+            background-color: #ffc107, 10%;
         }
     }
 
@@ -21,7 +21,7 @@
         color: #fff;
 
         &:hover {
-            background-color: darken(#dc3545, 10%);
+            background-color:#dc3545, 10%;
         }
     }
 }
