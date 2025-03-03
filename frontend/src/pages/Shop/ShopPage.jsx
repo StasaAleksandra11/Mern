@@ -34,7 +34,7 @@ function ShopPage() {
                                     <div className='card p-3'>
                                         <img
                                             className='card-img-top'
-                                            src={`http://localhost:4000/uploads/${product.image}`}
+                                            src={`https://backendmern-avj0.onrender.com/uploads/${product.image}`}
                                             alt={product.title}
                                         />
                                         <div className='card-body'>

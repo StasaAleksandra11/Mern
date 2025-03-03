@@ -15,7 +15,7 @@ function OrderProcessSteoOne() {
       <tr key={index}>
         <td>{index + 1}</td>
         <td>
-          <img src={`http://localhost:4000/uploads/${item.image}`} alt="{item.title}"  />
+          <img src={`https://backendmern-avj0.onrender.com/uploads/${item.image}`} alt="{item.title}"  />
           </td>
           <td>{item.title}</td>
           <td>

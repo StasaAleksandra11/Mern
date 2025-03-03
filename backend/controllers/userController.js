@@ -14,7 +14,7 @@ exports.register = catchAsync(async (req, res, next) => {
     if (!user) {
         const newUser = new Users(req.body);
         const saveNewUSer = await newUser.save();
-        await new Email({ email: saveNewUSer.email, username: saveNewUSer.username }, 'http://localhost:5173/').sendWelcome();
+        await new Email({ email: saveNewUSer.email, username: saveNewUSer.username }, 'https://mern-avj0.onrender.com/').sendWelcome();
 
         return res.status(200).json({
             status: 'success',

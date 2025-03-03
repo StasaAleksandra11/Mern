@@ -33,7 +33,7 @@ function Products() {
                 <tr key={index}>
                     <th>{index + 1}</th>
                     <th>
-                        <img src={`http://localhost:4000/uploads/${product.image}`} alt={product.title} />
+                        <img src={`https://backendmern-avj0.onrender.com/uploads/${product.image}`} alt={product.title} />
                     </th>
                     <th>{product.title}</th>
                     <th>{product.price}</th>
